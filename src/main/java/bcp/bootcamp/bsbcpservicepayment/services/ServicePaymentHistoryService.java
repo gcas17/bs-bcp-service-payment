@@ -8,7 +8,7 @@ public interface ServicePaymentHistoryService {
 
     Flux<ServicePaymentHistory> findAll();
 
-    Mono<ServicePaymentHistory> findByClientId(Integer clientId);
+    Flux<ServicePaymentHistory> findByClientId(Integer clientId);
 
     Mono<ServicePaymentHistory> save(ServicePaymentHistory servicePaymentHistory);
 

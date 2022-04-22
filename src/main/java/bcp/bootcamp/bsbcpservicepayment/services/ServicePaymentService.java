@@ -7,4 +7,6 @@ public interface ServicePaymentService {
 
     Flux<ServicePayment> findAll();
 
+    Flux<ServicePayment> findByChannel(String channel);
+
 }

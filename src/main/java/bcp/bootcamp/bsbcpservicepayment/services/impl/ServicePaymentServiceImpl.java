@@ -19,4 +19,9 @@ public class ServicePaymentServiceImpl implements ServicePaymentService {
     public Flux<ServicePayment> findAll() {
         return this.servicePaymentRepository.findAll();
     }
+
+    @Override
+    public Flux<ServicePayment> findByChannel(String channel) {
+        return this.servicePaymentRepository.findByChannel(channel);
+    }
 }
