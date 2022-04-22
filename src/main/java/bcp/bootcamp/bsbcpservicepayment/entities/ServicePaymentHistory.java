@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -38,5 +38,5 @@ public class ServicePaymentHistory {
     private String currency;
 
     @Column("TransactionDate")
-    private LocalDate transactionDate;
+    private LocalDateTime transactionDate;
 }

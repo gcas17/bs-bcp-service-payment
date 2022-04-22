@@ -42,7 +42,7 @@ public class RouterConfiguration {
                 operationId = "getServicePayments",
                 responses = {
                     @ApiResponse(responseCode = "200",
-                        description = "successful operation",
+                        description = "Operación exitosa",
                         content = @Content(array=@ArraySchema(schema = @Schema(implementation = ServicePayment.class)))),
                     @ApiResponse(
                         responseCode = "404",
@@ -51,7 +51,7 @@ public class RouterConfiguration {
                     )
                 },
                 parameters = {
-                        @Parameter(in = ParameterIn.QUERY, name = "channel", required = false )
+                        @Parameter(in = ParameterIn.QUERY, name = "channel", required = false)
                 }
             )
         ),
@@ -67,7 +67,7 @@ public class RouterConfiguration {
                     operationId = "getServicePaymentHistory",
                     responses = {
                         @ApiResponse(responseCode = "200",
-                            description = "successful operation",
+                            description = "Operación exitosa",
                             content = @Content(array=@ArraySchema(schema = @Schema(implementation = ServicePaymentHistory.class)))),
                         @ApiResponse(
                             responseCode = "404",
@@ -76,7 +76,7 @@ public class RouterConfiguration {
                         )
                     },
                     parameters = {
-                        @Parameter(in = ParameterIn.QUERY, name = "clientId", required = true )
+                        @Parameter(in = ParameterIn.QUERY, name = "clientId", required = true)
                     }
                 )
         ),
@@ -93,7 +93,7 @@ public class RouterConfiguration {
                 responses = {
                     @ApiResponse(
                         responseCode = "200",
-                        description = "successful operation",
+                        description = "Operación exitosa",
                         content = @Content(schema = @Schema(implementation = ServicePaymentHistory.class))
                     )
                 },
