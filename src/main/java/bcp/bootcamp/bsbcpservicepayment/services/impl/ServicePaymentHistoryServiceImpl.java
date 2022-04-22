@@ -1,10 +1,13 @@
 package bcp.bootcamp.bsbcpservicepayment.services.impl;
 
+import bcp.bootcamp.bsbcpservicepayment.core.exceptions.ServicePaymentBaseException;
 import bcp.bootcamp.bsbcpservicepayment.entities.ServicePaymentHistory;
 import bcp.bootcamp.bsbcpservicepayment.repositories.ServicePaymentHistoryRepository;
+import bcp.bootcamp.bsbcpservicepayment.repositories.ServicePaymentRepository;
 import bcp.bootcamp.bsbcpservicepayment.services.ServicePaymentHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,6 +18,9 @@ public class ServicePaymentHistoryServiceImpl implements ServicePaymentHistorySe
 
     @Autowired
     private ServicePaymentHistoryRepository servicePaymentHistoryRepository;
+
+    @Autowired
+    private ServicePaymentRepository servicePaymentRepository;
 
     @Override
     public Flux<ServicePaymentHistory> findAll() {
@@ -28,7 +34,16 @@ public class ServicePaymentHistoryServiceImpl implements ServicePaymentHistorySe
 
     @Override
     public Mono<ServicePaymentHistory> save(ServicePaymentHistory servicePaymentHistory) {
-        return this.servicePaymentHistoryRepository.save(servicePaymentHistory);
+
+        return this.servicePaymentRepository.findById(servicePaymentHistory.getServicePaymentId())
+                .onErrorResume(e -> Mono.empty())
+                .switchIfEmpty(Mono.error(new ServicePaymentBaseException(HttpStatus.NOT_FOUND, "Servicio de pago no encontrado")))
+                .flatMap(
+                    servicePayment -> {
+                        servicePaymentHistory.setServicePaymentName(servicePayment.getName());
+                        return this.servicePaymentHistoryRepository.save(servicePaymentHistory);
+                    }
+                );
     }
 
 }

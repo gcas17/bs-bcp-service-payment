@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
@@ -14,6 +15,11 @@ public class ServicePaymentServiceImpl implements ServicePaymentService {
 
     @Autowired
     private ServicePaymentRepository servicePaymentRepository;
+
+    @Override
+    public Mono<ServicePayment> findById(Integer id) {
+        return this.servicePaymentRepository.findById(id);
+    }
 
     @Override
     public Flux<ServicePayment> findAll() {

@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Service Payment", version = "1.0", description = "Documentation APIs v1.0"))
+@OpenAPIDefinition(info = @Info(title = "Api BS Service Payment V1.0.0", version = "1.0", description = "Api de negocio para el pago de servicios BCP"))
 public class ServicePaymentApplication {
 
 	public static void main(String[] args) {
