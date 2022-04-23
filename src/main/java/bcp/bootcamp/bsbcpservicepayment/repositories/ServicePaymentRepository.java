@@ -8,4 +8,6 @@ public interface ServicePaymentRepository extends ReactiveCrudRepository<Service
 
     Flux<ServicePayment> findByChannel(String channel);
 
+    Flux<ServicePayment> findByIdAndChannel(Integer id, String channel);
+
 }

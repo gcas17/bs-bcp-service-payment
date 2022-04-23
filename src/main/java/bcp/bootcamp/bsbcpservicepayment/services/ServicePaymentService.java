@@ -12,4 +12,6 @@ public interface ServicePaymentService {
 
     Flux<ServicePayment> findByChannel(String channel);
 
+    Flux<ServicePayment> findByIdAndChannel(Integer id, String channel);
+
 }

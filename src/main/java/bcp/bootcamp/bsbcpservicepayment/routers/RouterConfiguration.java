@@ -51,7 +51,8 @@ public class RouterConfiguration {
                     )
                 },
                 parameters = {
-                        @Parameter(in = ParameterIn.QUERY, name = "channel", required = false)
+                        @Parameter(in = ParameterIn.QUERY, name = "channel", required = false),
+                        @Parameter(in = ParameterIn.QUERY, name = "id", required = false),
                 }
             )
         ),

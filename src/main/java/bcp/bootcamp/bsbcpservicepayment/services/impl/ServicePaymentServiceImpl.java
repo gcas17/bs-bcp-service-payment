@@ -30,4 +30,9 @@ public class ServicePaymentServiceImpl implements ServicePaymentService {
     public Flux<ServicePayment> findByChannel(String channel) {
         return this.servicePaymentRepository.findByChannel(channel);
     }
+
+    @Override
+    public Flux<ServicePayment> findByIdAndChannel(Integer id, String channel) {
+        return this.servicePaymentRepository.findByIdAndChannel(id, channel);
+    }
 }
