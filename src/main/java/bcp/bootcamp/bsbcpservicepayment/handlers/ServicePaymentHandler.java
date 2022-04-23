@@ -32,11 +32,17 @@ public class ServicePaymentHandler {
                 .flatMap(list -> ServerResponse.ok().body(Mono.just(list), ServicePayment.class));
         }
 
-        if(request.queryParam("servicePaymentId").isEmpty() && request.queryParam("channel").isPresent()) {
+        if(request.queryParam("id").isEmpty() && request.queryParam("channel").isPresent()) {
             return this.servicePaymentService.findByChannel(request.queryParam("channel").get())
                 .switchIfEmpty(Mono.error(new ServicePaymentBaseException(HttpStatus.NO_CONTENT, "No se encontró elementos")))
                 .collectList()
                 .flatMap(list -> ServerResponse.ok().body(Mono.just(list), ServicePayment.class));
+        }
+
+        if(request.queryParam("id").isPresent() && request.queryParam("channel").isEmpty()) {
+            return this.servicePaymentService.findById(Integer.parseInt(request.queryParam("id").get()))
+                    .switchIfEmpty(Mono.error(new ServicePaymentBaseException(HttpStatus.NO_CONTENT, "No se encontró elementos")))
+                    .flatMap(list -> ServerResponse.ok().body(Mono.just(list), ServicePayment.class));
         }
 
         return this.servicePaymentService.findAll()
