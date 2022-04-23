@@ -26,3 +26,15 @@ Docker Tag
 `docker image ls`
 
 `docker push registrybcp.azurecr.io/bs-bcp-service-payment:0.0.1`
+
+## Levantando MONGODB
+
+`docker pull mongo`
+
+`docker run -d -p 27017:27017 --name mongodb mongo`
+
+## Levantando keycloak
+
+`docker run -d --name start-keycloak -p 9999:8080 -e KEYCLOAK_ADMIN=bcp -e KEYCLOAK_ADMIN_PASSWORD=Peru001% quay.io/keycloak/keycloak:17.0.0 start-dev`
+
+

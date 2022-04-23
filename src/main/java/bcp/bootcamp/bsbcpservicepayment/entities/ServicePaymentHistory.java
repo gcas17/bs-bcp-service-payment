@@ -1,5 +1,6 @@
 package bcp.bootcamp.bsbcpservicepayment.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -38,5 +39,6 @@ public class ServicePaymentHistory {
     private String currency;
 
     @Column("TransactionDate")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime transactionDate;
 }

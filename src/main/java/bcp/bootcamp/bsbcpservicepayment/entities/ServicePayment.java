@@ -1,5 +1,6 @@
 package bcp.bootcamp.bsbcpservicepayment.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -26,6 +27,7 @@ public class ServicePayment {
     private String channel;
 
     @Column("CreationDate")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate creationDate;
 
     @Column("Status")
