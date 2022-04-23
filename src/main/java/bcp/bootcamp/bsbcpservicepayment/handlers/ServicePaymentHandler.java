@@ -7,6 +7,7 @@ import bcp.bootcamp.bsbcpservicepayment.services.ServicePaymentHistoryService;
 import bcp.bootcamp.bsbcpservicepayment.services.ServicePaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -26,7 +27,7 @@ public class ServicePaymentHandler {
         return (request.queryParam("channel").isPresent()?
                 this.servicePaymentService.findByChannel(request.queryParam("channel").get()) :
                 this.servicePaymentService.findAll())
-                .switchIfEmpty(Mono.error(new ServicePaymentBaseException("No se encontró elementos")))
+                .switchIfEmpty(Mono.error(new ServicePaymentBaseException(HttpStatus.NO_CONTENT, "No se encontró elementos")))
                 .collectList()
                 .flatMap(list -> ServerResponse.ok().body(Mono.just(list), ServicePayment.class));
     }
@@ -35,7 +36,7 @@ public class ServicePaymentHandler {
         Integer clientId = Integer.parseInt(request.queryParam("clientId").get());
 
         return this.servicePaymentHistoryService.findByClientId(clientId)
-                .switchIfEmpty(Mono.error(new ServicePaymentBaseException("No se encontró elementos")))
+                .switchIfEmpty(Mono.error(new ServicePaymentBaseException(HttpStatus.NO_CONTENT, "No se encontró elementos")))
                 .collectList()
                 .flatMap(list -> ServerResponse.ok().body(Mono.just(list), ServicePaymentHistory.class));
     }
